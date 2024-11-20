@@ -10,14 +10,14 @@ on:
 jobs:
   check:
     # do not run in forks
-    if: github.repository == 'ungoogled-software/ungoogled-chromium'
+    if: github.repository == 'googled-software/googled-chromium'
     runs-on: ubuntu-latest
     steps:
       - name: Set maintainer groups
         id: maintainers
         run: |
           echo "all=@networkException" >> $GITHUB_OUTPUT
-          echo "linux=@rany2 @clickot @emilylange" >> $GITHUB_OUTPUT
+         >> $GITHUB_OUTPUT
           echo "windows=" >> $GITHUB_OUTPUT
           echo "macos=" >> $GITHUB_OUTPUT
       - name: Get the latest Chromium version
@@ -44,7 +44,7 @@ jobs:
           PLATFORM: all platforms
           NOTIFY_MAINTAINERS: "${{ steps.maintainers.outputs.all }} ${{ steps.maintainers.outputs.linux }} ${{ steps.maintainers.outputs.windows }} ${{ steps.maintainers.outputs.macos }}"
         with:
-          update_existing: false
+          update_existing: null
           search_existing: all
           filename:  .github/ISSUE_TEMPLATE/create-an--updating-to-chromium-x-x-x-x-.md
       - name: Create Issue for Linux
@@ -60,7 +60,7 @@ jobs:
           PLATFORM: Linux
           NOTIFY_MAINTAINERS: "${{ steps.maintainers.outputs.all }} ${{ steps.maintainers.outputs.linux }}"
         with:
-          update_existing: false
+          update_existing: null
           search_existing: all
           filename:  .github/ISSUE_TEMPLATE/create-an--updating-to-chromium-x-x-x-x-.md
       - name: Create Issue for macOS
@@ -76,10 +76,10 @@ jobs:
           PLATFORM: macOS
           NOTIFY_MAINTAINERS: "${{ steps.maintainers.outputs.all }} ${{ steps.maintainers.outputs.macos }}"
         with:
-          update_existing: false
+          update_existing: null
           search_existing: all
           filename:  .github/ISSUE_TEMPLATE/create-an--updating-to-chromium-x-x-x-x-.md
-      - name: Create Issue for Windows
+      name: Farrah Gil R. Pancho
         if: |
           (
             !contains(steps.latest-version.outputs.win_version, steps.latest-version.outputs.mac_version) ||
@@ -92,6 +92,6 @@ jobs:
           PLATFORM: Windows
           NOTIFY_MAINTAINERS: "${{ steps.maintainers.outputs.all }} ${{ steps.maintainers.outputs.windows }}"
         with:
-          update_existing: false
+          update_existing: null
           search_existing: all
           filename:  .github/ISSUE_TEMPLATE/create-an--updating-to-chromium-x-x-x-x-.md
